@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@zoom/videosdk": "^1.10.8"
+  }
+}

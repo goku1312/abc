@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP verification UI using bootstrap</title>
+
+    <!-- bootstrap 5 stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- fontawesome 6 stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <style>
+        body{
+            background-color: #ebecf0;
+        }
+        .otp-letter-input{
+            max-width: 100%;
+            height: 90px;
+            border: 1px solid #2ed339;
+            border-radius:10px;
+            color: #2ed339;
+            font-size: 60px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .btn{
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container p-5" style="margin-right:20px ;">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-5 mt-5">
+                <div class="bg-white p-5 rounded-3 shadow-sm border">
+                    <form method="POST"  action="verifyotp1">
+                        {% csrf_token %}
+                    <div>
+                        <p class="text-center text-success" style="font-size: 5.5rem;"><i class="fa-solid fa-envelope-circle-check"></i></p>
+                        <p class="text-center text-center h5 ">Please check your email</p>
+                        <p class="text-muted text-center">We've sent a code to {{email}}</p>
+                      
+                        <div class="row pt-4 pb-2" id="otp-inputs">
+                            <div class="col-3">
+                                <input class="otp-letter-input" type="text" name="otp1" maxlength="1" oninput="moveToNextInput(this)" />
+                            </div>
+                            <div class="col-3">
+                                <input class="otp-letter-input" type="text" name="otp2" maxlength="1" oninput="moveToNextInput(this)" />
+                            </div>
+                            <div class="col-3">
+                                <input class="otp-letter-input" type="text" name="otp3" maxlength="1" oninput="moveToNextInput(this)" />
+                            </div>
+                            <div class="col-3">
+                                <input class="otp-letter-input" type="text"  name="otp4" maxlength="1" oninput="moveToNextInput(this)" />
+                            </div>
+                        </div>
+                       
+                        <p class="text-muted text-center">Didn't get the code? <a href="otp" class="text-success" style="text-decoration: none;">Click to resend.</a></p>
+
+                        <div class="row pt-5">
+                            <div class="col-6">
+                              
+                                <button onclick="window.location.href='login'" class="btn btn-outline-secondary w-100" >Cancel</button>
+                            </div>
+                            <div class="col-6">
+                                <!-- <button class="btn btn-success w-100">Verify</button> -->
+                                <input type="submit" name="Verify" id="verify" class="btn btn-success w-100" value="Verify" >
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script>
+        function moveToNextInput(currentInput) {
+            // Get the length of the value in the current input
+            var length = currentInput.value.length;
+            
+            // If the length is 1, move focus to the next input
+            if (length === 1) {
+                var nextInput = currentInput.parentElement.nextElementSibling.querySelector("input");
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            }
+        }
+    </script> -->
+    <!-- ... Your HTML code ... -->
+
+<script>
+    function moveToNextInput(currentInput) {
+        var length = currentInput.value.length;
+        var keyCode = event.keyCode || event.which;
+
+        if (length === 1 && keyCode !== 8) {
+            var nextInput = currentInput.parentElement.nextElementSibling.querySelector("input");
+            if (nextInput) {
+                nextInput.focus();
+            }
+        } else if (length === 0 && keyCode === 8) {
+            var prevInput = currentInput.parentElement.previousElementSibling.querySelector("input");
+            if (prevInput) {
+                prevInput.focus();
+            }
+        }
+    }
+
+    // Listen for keydown events to handle backspace
+    document.addEventListener("keydown", function (event) {
+        var activeElement = document.activeElement;
+
+        // Check if the active element is an input field
+        if (activeElement.tagName.toLowerCase() === "input" && activeElement.classList.contains("otp-letter-input")) {
+            moveToNextInput(activeElement);
+        }
+    });
+</script>
+
+<!-- ... Your HTML code ... -->
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send OTP</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Send OTP</button>
+    </form>
+</body>
+</html>
