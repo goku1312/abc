@@ -254,3 +254,17 @@ ACCOUNT_SESSION_REMEMBER = True
 
 # 861497105811-au2of1g6p3fmsgbq5md2entrc2kme2n5.apps.googleusercontent.com = Client id
 # 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  =Client secret
+
+
+
+
+
+AWS_ACCESS_KEY_ID = 'AKIA6ODU2RGGKZGZTIW3'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'backcourse123'
+AWS_S3_SIGNATURE_NAME = 's3v4',
+AWS_S3_REGION_NAME = 'ap-southeast-2'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL =  None
+AWS_S3_VERITY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
